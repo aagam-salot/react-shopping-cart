@@ -25,6 +25,7 @@ const totalInitialValues = {
   productQuantity: 0,
   installments: 0,
   totalPrice: 0,
+  discount: 0,
   currencyId: 'USD',
   currencyFormat: '$',
 };

@@ -20,6 +20,7 @@ export interface ICartTotal {
   productQuantity: number;
   installments: number;
   totalPrice: number;
+  discount: number;
   currencyId: string;
   currencyFormat: string;
 }

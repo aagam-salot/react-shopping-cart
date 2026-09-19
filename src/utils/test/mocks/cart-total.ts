@@ -4,6 +4,7 @@ const mockTotal: ICartTotal = {
   productQuantity: 1,
   installments: 1,
   totalPrice: 10.9,
+  discount: 0,
   currencyId: 'USD',
   currencyFormat: '$',
 };
