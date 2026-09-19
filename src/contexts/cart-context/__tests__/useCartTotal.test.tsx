@@ -84,6 +84,28 @@ describe('[contexts] - cart-context', () => {
         });
       });
 
+      test('should apply the discount at exactly 5 items (the threshold boundary)', () => {
+        setupMockUseContext(mockCartTotal);
+        const { result } = renderHook(() => useCartTotal(), { wrapper });
+
+        const exactlyFive = mockCartProducts.map((product, index) => ({
+          ...product,
+          // 1 + 1 + 3 = 5 items, exactly at the threshold.
+          quantity: index === 2 ? 3 : 1,
+        }));
+        // Raw total: 10.9 + 13.25 + (25.9 x 3) = 101.85; 10% off = 10.19, leaving 91.66.
+        result.current.updateCartTotal(exactlyFive);
+
+        expect(total).toEqual({
+          productQuantity: 5,
+          installments: 12,
+          totalPrice: 91.66,
+          discount: 10.19,
+          currencyId: 'USD',
+          currencyFormat: '$',
+        });
+      });
+
       test('should not apply a discount when the cart holds fewer than 5 items', () => {
         setupMockUseContext(mockCartTotal);
         const { result } = renderHook(() => useCartTotal(), { wrapper });
